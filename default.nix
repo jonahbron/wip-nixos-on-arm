@@ -40,7 +40,7 @@ let
         evalWith (fromPkgs "nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
       ).config.system.build.isoImage;
 
-      rootfs = (
+      rootfs =  (
         evalWith ./modules/rootfs.nix
       ).config.system.build.rootfsImage;
 
@@ -56,5 +56,4 @@ let
     }
   ;
 in
-  builtins.listToAttrs
-  (map (name: { inherit name; value = evalDevice name; }) devices)
+(evalDevice "radxa-rock5b").rootfs
